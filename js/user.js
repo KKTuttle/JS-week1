@@ -7,7 +7,7 @@ function User(user_name) {
 User.prototype.getUser = function () {
   $.get('https://api.github.com/users/' + this.user_name +'?access_token=' + apiKey).then(function(response){
     $('.showResult').text(response.login + ' has ' + response.followers + " followers.");
-    // console.log(response);
+    console.log(response);
   }).fail(function(error){
     console.log(error.responseJSON.message);
   });
@@ -15,13 +15,13 @@ User.prototype.getUser = function () {
 
 User.prototype.getRepos = function() {
   $.get('https://api.github.com/users/' + this.user_name +'/repos?access_token=' + apiKey).then(function(response){
-    // console.log(response);
+    console.log(response);
     var foundRepos = response;
     foundRepos.forEach(function(repo) {
       var name = repo.name;
       var describ = repo.description;
       var url = repo.html_url;
-      $('.showRepositories').append('<li><a href =' + url + '>' + name +'</a></li><h6>Description :'+ describ +'</h6><hr>');
+      $('.showRepositories').prepend('<li><a href =' + url + '>' + name +'</a></li><h6>Description :'+ describ +'</h6><hr>');
     });
   }).fail(function(error){
     console.log(error.responseJSON.message);
@@ -31,9 +31,15 @@ User.prototype.getRepos = function() {
 User.prototype.getFollowers = function() {
   $.get('https://api.github.com/users/'+ this.user_name + '/followers?access_token=' + apiKey).then(function(response){
     console.log(response);
-    // var foundFollowers =
+    var foundFollowers = response;
+    foundFollowers.forEach(function(follower) {
+      var follower_name = follower.login;
+      var follower_url = follower.html_url;
+      $('.showFollowers').prepend('<li><a href =' + follower_url + '>' + follower_name +'</a></li>');
+    });
   }).fail(function(error){
     console.log(error.responseJSON.message);
   });
 };
+
 exports.userModule = User;
