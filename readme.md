@@ -18,10 +18,11 @@ _none_
 * For security purposes, place your token in an .env file at the top level of your directory. And Include .env in .gitignore.
 * Create an .env file that includes your GitHub API Key.
 
-* then run commands : npm install
-**: bower install
-** : gulp build
-** : gulp serve
+* then run commands: 
+- npm install
+- bower install
+- gulp build
+- gulp serve
 
 ## Support and contact details
 
