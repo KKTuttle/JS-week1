@@ -1,4 +1,3 @@
-// var apiKey = require('./../.env').apiKey;
 var User = require('./../js/user.js').userModule;
 
 $(document).ready(function() {
